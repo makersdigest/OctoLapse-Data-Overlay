@@ -25,7 +25,7 @@ def main():
     command = "convert " + input_file 
 
     # Add Rectangle
-    command += " -fill '#0008' -draw 'rectangle 5,980,1910,1075'"
+    command += " -fill '#0008' -draw 'rectangle 5,980,500,1075'"
 
     # Progress Bar - Outline
     command += " -fill none -stroke white -strokewidth 1 -draw 'rectangle 10,985, 415 1005'" 
