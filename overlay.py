@@ -28,17 +28,17 @@ def main():
     command += " -fill '#0008' -draw 'rectangle 5,980,1910,1075'"
 
     # Progress Bar - Outline
-    command += " -fill none -stroke white -strokewidth 1 -draw 'rectangle 10,985, 300, 1005'" 
+    command += " -fill none -stroke white -strokewidth 1 -draw 'rectangle 10,985, 415 1005'" 
     
     # progress bar fill
     prog_range = [0, 100];
-    rect_range = [10, 300];
+    rect_range = [10, 415];
     interp_prog = interp1d(prog_range, rect_range)
     raw_progress = data['progress']['progress']
     progress = interp_prog(raw_progress)
 
     command += " -fill white -draw 'rectangle 10, 985, "+str(progress)+", 1005'"
-    command += " -fill white -pointsize 16 -annotate +305+1000 '"+str(round(raw_progress,1))+"%'"
+    command += " -fill white -pointsize 16 -annotate +420+1000 '"+str(round(raw_progress,1))+"%'"
 
     # Add filename
     #command += " -fill white -pointsize 16 -annotate +10+1000 'Filename: '"
@@ -70,9 +70,12 @@ def main():
     remain_secs = timedelta(seconds = data['progress']['print_time_left'])
     remain_time = str(remain_secs)
     #remain_time = strftime("%d %H:%M:%S", data['progress']['print_time_left'])
-    command += " -fill white -pointsize 14 -annotate +170+1023 'Local Time:         "+localtime+"'"
-    command += " -fill white -pointsize 14 -annotate +170+1045 'Elapsed Time:     "+elap_time+"'"
-    command += " -fill white -pointsize 14 -annotate +170+1067 'Remaining Time: "+remain_time+"'"
+    command += " -fill white -pointsize 14 -annotate +205+1023 'Local Time: '"
+    command += " -fill white -pointsize 14 -annotate +285+1023 '"+localtime+"'"
+    command += " -fill white -pointsize 14 -annotate +189+1045 'Elapsed Time: '"
+    command += " -fill white -pointsize 14 -annotate +285+1045 '"+elap_time+"'"
+    command += " -fill white -pointsize 14 -annotate +170+1067 'Remaining Time: '"
+    command += " -fill white -pointsize 14 -annotate +285+1067 '"+remain_time+"'"
 
 
 
