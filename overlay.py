@@ -4,11 +4,12 @@ import subprocess
 import os
 import sys
 from scipy.interpolate import interp1d
+import shutil
 
 input_path = "/opt/OctoPrintScripts/OctoLapse-Data-Overlay/data.json"
 
 input_file = sys.argv[6]
-output_file = 'output.jpg'
+output_file = '/tmp/output.jpg'
 
 col_1 = 60
 col_2 = 123
@@ -62,6 +63,7 @@ def main():
     command += " "+output_file
     os.system(command)
 
+    os.system("mv "+output_file+" "+input_file)
     ## Overlay Text
     #subprocess.call(['convert', 'test.jpg',
     #    "-fill '#0008' -draw rectangle 5,980,1910,1075",
