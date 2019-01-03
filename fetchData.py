@@ -3,7 +3,7 @@ import urllib2
 import json
 import sys
 
-output_file = "/opt/OctoPrintScripts/tlData/data.json"
+output_file = "/opt/OctoPrintScripts/OctoLapse-Data-Overlay/data.json"
 
 def getRequest(path):
     octoprintUrl = "http://192.168.1.75:5000/api"

@@ -5,8 +5,7 @@ import os
 import sys
 from scipy.interpolate import interp1d
 
-input_path = "/opt/OctoPrintScripts/tlData/data.json"
-input_path = "data.json"
+input_path = "/opt/OctoPrintScripts/OctoLapse-Data-Overlay/data.json"
 
 input_file = sys.argv[6]
 output_file = 'output.jpg'
