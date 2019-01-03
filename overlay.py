@@ -5,6 +5,8 @@ import os
 import sys
 from scipy.interpolate import interp1d
 import shutil
+from time import gmtime, strftime
+from datetime import datetime, timedelta
 
 input_path = "/opt/OctoPrintScripts/OctoLapse-Data-Overlay/data.json"
 
@@ -37,12 +39,13 @@ def main():
 
     command += " -fill white -draw 'rectangle 10, 985, "+str(progress)+", 1005'"
     command += " -fill white -pointsize 16 -annotate +305+1000 '"+str(round(raw_progress,1))+"%'"
+
     # Add filename
     #command += " -fill white -pointsize 16 -annotate +10+1000 'Filename: '"
     #command += " -fill white -pointsize 16 -annotate +85+1000 '"+data['print_file']['name']+"'"
 
     # Add Temperature Grid - Right, top, left, bottom
-    command += " -fill white -draw 'line 10, 1030, 200, 1030'"  # Horiz Line
+    command += " -fill white -draw 'line 10, 1030, 160, 1030'"  # Horiz Line
     command += " -fill white -draw 'line "+str(col_1)+", 1010, "+str(col_1)+", 1075'" # Vert 1
     command += " -fill white -draw 'line "+str(col_2)+", 1010, "+str(col_2)+", 1075'" # vert 2
     command += " -fill white -pointsize 14 -annotate +10+1023 'Temps'"
@@ -56,6 +59,20 @@ def main():
     command += " -fill white -pointsize 14 -annotate +"+str(col_1 + 5)+"+1067 '"+str(data['he_temp']['actual'])+"'"
     command += " -fill white -pointsize 14 -annotate +"+str(col_2 + 5)+"+1047 '"+str(data['bed_temp']['target'])+"'"
     command += " -fill white -pointsize 14 -annotate +"+str(col_2 + 5)+"+1067 '"+str(data['bed_temp']['actual'])+"'"
+
+    # Add Times
+    localtime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+    
+    elap_secs = timedelta(seconds = data['progress']['print_time'])
+    elap_time = str(elap_secs)
+    #elap_time = strftime("%d %H:%M:%S", data['progress']['print_time'])
+
+    remain_secs = timedelta(seconds = data['progress']['print_time_left'])
+    remain_time = str(remain_secs)
+    #remain_time = strftime("%d %H:%M:%S", data['progress']['print_time_left'])
+    command += " -fill white -pointsize 14 -annotate +170+1023 'Local Time:         "+localtime+"'"
+    command += " -fill white -pointsize 14 -annotate +170+1045 'Elapsed Time:     "+elap_time+"'"
+    command += " -fill white -pointsize 14 -annotate +170+1067 'Remaining Time: "+remain_time+"'"
 
 
 
